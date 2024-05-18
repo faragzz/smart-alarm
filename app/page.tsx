@@ -37,7 +37,7 @@ export default function Home() {
       onValue(modeRef, (snapshot) => {
         const data = snapshot.val();
         setBState(data ? "ON" : "OFF");
-        setBgColorBtn((data===1)?"bg-green-400" : "bg-red-400");
+        setBgColorBtn(data === 1 ? "bg-green-400" : "bg-red-400");
       });
     }, 1000); // Update every second
 
@@ -54,11 +54,19 @@ export default function Home() {
     set(modeRef, newState === "ON" ? 1 : 0);
   };
 
+  const reset = () => {
+    const cRef = ref(database, "counter/state");
+    set(cRef, 0);
+    const dRef = ref(database, "distance/state");
+    set(dRef, 0);
+  };
+
   return (
     <div className="relative flex flex-col justify-center items-center  w-full min-h-screen bg-yellow-100">
       <div className="absolute top-0 flex justify-center py-4 bg-blue-300 w-full">
         <p className="text-3xl font-bold">Door Smart Alarm</p>
       </div>
+
       <div className="flex flex-col justify-center items-center mt-20">
         <p className="text-2xl font-bold text-center mb-10">
           Turn ON Or OFF the Device
@@ -75,6 +83,12 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center justify-center mt-10 gap-10 w-full">
         <p className="text-2xl font-bold text-center">Data monitor device</p>
+        <button
+          onClick={reset}
+          className="px-8 py-3 bg-red-700 rounded-2xl text-white font-bold"
+        >
+          Reset
+        </button>
         <div className="flex justify-evenly text-xl xl:text-2xl  font-bold w-full">
           <p>{"Counter : " + counter}</p>
           <p>{"Distance : " + distance}</p>
