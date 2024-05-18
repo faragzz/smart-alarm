@@ -37,6 +37,7 @@ export default function Home() {
       onValue(modeRef, (snapshot) => {
         const data = snapshot.val();
         setBState(data ? "ON" : "OFF");
+        setBgColorBtn((data===1)?"bg-green-400" : "bg-red-400");
       });
     }, 1000); // Update every second
 
@@ -52,10 +53,10 @@ export default function Home() {
     const modeRef = ref(database, "mode/state");
     set(modeRef, newState === "ON" ? 1 : 0);
   };
-  
+
   return (
-    <div className="flex flex-col w-full h-screen bg-yellow-100">
-      <div className="flex justify-center py-4 bg-blue-300 w-full">
+    <div className="relative flex flex-col justify-center items-center  w-full min-h-screen bg-yellow-100">
+      <div className="absolute top-0 flex justify-center py-4 bg-blue-300 w-full">
         <p className="text-3xl font-bold">Door Smart Alarm</p>
       </div>
       <div className="flex flex-col justify-center items-center mt-20">
@@ -66,13 +67,13 @@ export default function Home() {
           onClick={toggleState}
           className={`${bgColorBtn} rounded-full p-16 w-48 h-48 text-white text-4xl font-bold`}
         >
-          {state}
+          {bState}
         </button>
       </div>
       <div className="flex justify-center items-center mt-10 text-2xl font-semibold">
         <p>{"State : " + bState}</p>
       </div>
-      <div className="flex flex-col items-center justify-center mt-10 gap-10">
+      <div className="flex flex-col items-center justify-center mt-10 gap-10 w-full">
         <p className="text-2xl font-bold text-center">Data monitor device</p>
         <div className="flex justify-evenly text-2xl font-bold w-full">
           <p>{"Counter : " + counter}</p>
