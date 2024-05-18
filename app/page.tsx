@@ -75,7 +75,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center justify-center mt-10 gap-10 w-full">
         <p className="text-2xl font-bold text-center">Data monitor device</p>
-        <div className="flex justify-evenly text-2xl font-bold w-full">
+        <div className="flex justify-evenly text-xl xl:text-2xl  font-bold w-full">
           <p>{"Counter : " + counter}</p>
           <p>{"Distance : " + distance}</p>
           <p>{"Buzzer : " + buzzer}</p>
